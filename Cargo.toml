@@ -1,0 +1,8 @@
+[package]
+name = "number2text"
+version = "2.2.1"
+edition = "2024"
+
+[dependencies]
+gtk4 = "0.10"
+libadwaita = { version = "0.8", features = ["v1_5"] }
