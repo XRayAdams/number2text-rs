@@ -2,6 +2,6 @@ Package: number2text
 Version: 2.2.1+23
 Architecture: amd64
 Priority: optional
-Depends:
+Depends: libgtk-4-1, libadwaita-1-0
 Maintainer: Konstantin Adamov <xrayadamo@gmail.com>
 Description: Number to Text converter
