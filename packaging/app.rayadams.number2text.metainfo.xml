@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>app.rayadams.number2text</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Number to Text converter</name>
+  <summary>Number 2 Text is a free, open-source application to convert numbers to text</summary>
+
+  <url type="homepage">https://github.com/XRayAdams/number2text-rs</url>
+
+  <content_rating type="oars-1.0"/>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+  <description>
+<p>Number 2 Text is a free, open-source utility designed for the quick and accurate conversion of numerical values into their textual representation</p>
+
+<p>Supported Languages</p>
+
+<ul>
+<li>English</li>
+<li>Spanish</li>
+<li>German</li>
+<li>French</li>
+<li>Russian</li>
+</ul>
+</description>
+
+  <launchable type="desktop-id">app.rayadams.number2text.desktop</launchable>
+  <developer id="app.rayadams">
+    <name translate="no">Konstantin Asamov</name>
+  </developer>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/XRayAdams/number2text/refs/heads/master/screenshots/screenshot01.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/XRayAdams/number2text/refs/heads/master/screenshots/screenshot02.png</image>
+    </screenshot>  
+  </screenshots>
+</component>

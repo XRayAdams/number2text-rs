@@ -1,0 +1,46 @@
+title: Number to text
+name: number2text
+version: 2.2.1+23
+summary: Number to Text
+description: Number to Text generator
+contact: xrayadamo@gmail.com
+icon: snap/gui/number2text.png
+confinement: strict
+base: core24
+grade: stable
+license: MIT
+source-code: https://github.com/xrayadams/number2text-rs
+website: https://github.com/xrayadams/number2text-rs
+issues: https://github.com/xrayadams/number2text-rs/issues
+platforms:
+  amd64:
+  arm64:
+
+apps:
+  number2text:
+    command: bin/number2text
+    extensions: [gnome]
+    common-id: app.rayadams.number2text
+    #desktop: share/applications/number2text.desktop
+    plugs:
+      - home
+      - desktop
+      - desktop-legacy
+      - wayland
+      - x11
+
+parts:
+  number2text:
+    plugin: rust
+    source: .
+    rust-channel: stable
+    build-packages:
+      - pkg-config
+      - libgtk-4-dev
+      - libadwaita-1-dev
+
+  assets:
+    plugin: dump
+    source: assets
+    organize:
+      '*': assets/

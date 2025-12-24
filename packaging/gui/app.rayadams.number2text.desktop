@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=2.2.1+23
+Name=Number 2 Text
+GenericName=Number 2 Text
+Comment=Any number to text converter
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=Number, Text, Converter;
+StartupWMClass=app.rayadams.number2text
+
+Exec=/usr/local/lib/number2text/number2text
+TryExec=/usr/local/lib/number2text/number2text
+Icon=app.rayadams.number2text

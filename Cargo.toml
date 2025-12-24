@@ -1,6 +1,6 @@
 [package]
 name = "number2text"
-version = "2.2.1"
+version = "2.2.1+23"
 edition = "2024"
 
 [dependencies]

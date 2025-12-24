@@ -1,0 +1,7 @@
+Package: number2text
+Version: 2.2.1+23
+Architecture: amd64
+Priority: optional
+Depends:
+Maintainer: Konstantin Adamov <xrayadamo@gmail.com>
+Description: Number to Text converter

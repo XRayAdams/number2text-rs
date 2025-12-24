@@ -31,10 +31,6 @@ impl AppViewModel {
         }
     }
 
-    pub fn get_selected_index(&self) -> usize {
-        self.selected_index
-    }
-
     pub fn get_app_version() -> &'static str {
         env!("CARGO_PKG_VERSION")
     }

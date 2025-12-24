@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=2.2.1+23
+Name=Number 2 Text
+GenericName=Number 2 Text
+Comment=Any number to text converter
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=Number, Text, Converter;
+Icon=${SNAP}/meta/gui/number2text.png
+Exec=number2text
+StartupWMClass=app.rayadams.number2text
