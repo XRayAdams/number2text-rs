@@ -1,7 +1,11 @@
 [package]
 name = "number2text"
-version = "2.2.1+23"
+version = "2.2.1+24"
 edition = "2024"
+authors = ["Konstantin Adamov <xrayadamo@gmail.com>"]
+description = "A GUI application that converts numbers to text in various languages."
+license = "MIT"
+repository = "https://github.com/XRayAdams/number2text-rs"
 
 [dependencies]
 gtk4 = "0.10"

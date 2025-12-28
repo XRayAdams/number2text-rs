@@ -1,6 +1,12 @@
+/*
+    Copyright 2025 Konstantin Adamov
+    Licenced under MIT Licence (https://opensource.org/licenses/MIT)
+*/
+
 use super::base_converter::BaseConverter;
 
 pub struct EnglishConverter;
+
 
 impl EnglishConverter {
     const ONES: [&'static str; 20] = [
@@ -13,7 +19,7 @@ impl EnglishConverter {
         "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
     ];
 }
-
+// Implementation details for English number conversion
 impl BaseConverter for EnglishConverter {
     fn name(&self) -> &str {
         "English"

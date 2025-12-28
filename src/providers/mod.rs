@@ -1,3 +1,8 @@
+/*
+    Copyright 2025 Konstantin Adamov
+    Licenced under MIT Licence (https://opensource.org/licenses/MIT)
+*/
+
 pub mod base_converter;
 pub mod english_converter;
 pub mod spanish_converter;

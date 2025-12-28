@@ -35,10 +35,13 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/XRayAdams/number2text/refs/heads/master/screenshots/screenshot01.png</image>
+      <image>https://raw.githubusercontent.com/XRayAdams/number2text-rs/refs/heads/master/screenshots/screenshot01.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/XRayAdams/number2text/refs/heads/master/screenshots/screenshot02.png</image>
+      <image>https://raw.githubusercontent.com/XRayAdams/number2text-rs/refs/heads/master/screenshots/screenshot02.png</image>
+    </screenshot>  
+    <screenshot>
+      <image>https://raw.githubusercontent.com/XRayAdams/number2text-rs/refs/heads/master/screenshots/screenshot03.png</image>
     </screenshot>  
   </screenshots>
 </component>

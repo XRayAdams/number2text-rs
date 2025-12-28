@@ -1,3 +1,8 @@
+/*
+    Copyright 2025 Konstantin Adamov
+    Licenced under MIT Licence (https://opensource.org/licenses/MIT)
+*/
+
 use gtk4::prelude::*;
 use libadwaita as adw;
 use gtk4::{Application, ApplicationWindow, Label, Entry, ComboBoxText, Box as GtkBox, TextView, 
@@ -15,6 +20,7 @@ const SPACING_LARGE: i32 = 18;
 
 fn main() {
     adw::init().expect("Failed to initialize Libadwaita");
+    
     let app = Application::builder()
         .application_id("app.rayadams.number2text")
         .flags(gio::ApplicationFlags::NON_UNIQUE)
@@ -158,6 +164,7 @@ fn build_ui(app: &Application) {
             if let Some(number) = entry_for_combo.text().as_str().parse::<i64>().ok() {
                 let result = vm_for_combo.borrow().convert_number(number);
                 let buffer = text_view_for_combo.buffer();
+                
                 buffer.set_text(&result);
             }
         }

@@ -1,3 +1,8 @@
+/*
+    Copyright 2025 Konstantin Adamov
+    Licenced under MIT Licence (https://opensource.org/licenses/MIT)
+*/
+
 use crate::providers::number_converter::NumberConverter;
 
 pub struct AppViewModel {
@@ -13,6 +18,7 @@ impl AppViewModel {
         }
     }
 
+    /// Returns the list of available language names.
     pub fn get_language_names(&self) -> Vec<String> {
         self.number_converter
             .base_converters
