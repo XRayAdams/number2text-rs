@@ -1,3 +1,9 @@
+/*
+    Copyright 2025 Konstantin Adamov
+    Licenced under MIT Licence (https://opensource.org/licenses/MIT)
+*/
+
+
 use super::base_converter::BaseConverter;
 
 pub struct GermanConverter;

@@ -1,3 +1,8 @@
+/*
+    Copyright 2025 Konstantin Adamov
+    Licenced under MIT Licence (https://opensource.org/licenses/MIT)
+*/
+
 use super::base_converter::BaseConverter;
 use super::english_converter::EnglishConverter;
 use super::spanish_converter::SpanishConverter;
@@ -22,11 +27,5 @@ impl NumberConverter {
                 Box::new(RussianConverter),
             ],
         }
-    }
-}
-
-impl Default for NumberConverter {
-    fn default() -> Self {
-        Self::new()
     }
 }
