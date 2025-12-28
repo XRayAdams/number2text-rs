@@ -1,6 +1,6 @@
 %define _name number2text
 %define _version 2.2.1
-%define _release 23
+%define _release 24
 %define debug_package %{nil}
 
 Name: %{_name}
