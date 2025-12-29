@@ -23,6 +23,10 @@ impl BaseConverter for ItalianConverter {
     fn name(&self) -> &str {
         "Italian"
     }
+    
+    fn short_name(&self) -> &str {
+        "it"
+    }
 
     fn native_number_too_large_error_text(&self) -> &str {
         "Numero troppo grande"

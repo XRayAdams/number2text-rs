@@ -24,6 +24,10 @@ impl BaseConverter for EnglishConverter {
     fn name(&self) -> &str {
         "English"
     }
+    
+    fn short_name(&self) -> &str {
+        "en"
+    }
 
     fn native_number_too_large_error_text(&self) -> &str {
         "Number too large"

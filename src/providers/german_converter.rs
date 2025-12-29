@@ -29,6 +29,10 @@ impl BaseConverter for GermanConverter {
         "Nummer zu groß"
     }
 
+    fn short_name(&self) -> &str {
+        "de"
+    }
+
     fn convert(&self, input: i64) -> String {
         if input > 999_999_999_999 {
             return self.native_number_too_large_error_text().to_string();

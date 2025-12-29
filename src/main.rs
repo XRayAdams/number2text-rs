@@ -9,16 +9,26 @@ use gtk4::{Application, ApplicationWindow, Label, Entry, ComboBoxText, Box as Gt
            MenuButton, gio, HeaderBar, IconTheme};
 use std::cell::RefCell;
 use std::rc::Rc;
+use std::env;
 
 mod providers;
 mod view_model;
 mod settings;
+mod cmdline;
 use view_model::AppViewModel;
+use cmdline::parse_cmdline_args;
 
 const SPACING_MEDIUM: i32 = 12;
 const SPACING_LARGE: i32 = 18;
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    if args.len() > 1 {
+        parse_cmdline_args(&args);
+        return;
+    }
+
     adw::init().expect("Failed to initialize Libadwaita");
     
     let app = Application::builder()

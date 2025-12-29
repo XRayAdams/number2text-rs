@@ -1,0 +1,63 @@
+.TH NUMBER2TEXT 1 "December 2025" "2.2.1+24" "User Commands"
+.SH NAME
+number2text \- A number to text converter application
+.SH SYNOPSIS
+.B number2text
+.br
+.B number2text
+[\fB\-v\fR | \fB\-\-version\fR]
+.br
+.B number2text
+[\fB\-h\fR | \fB\-\-help\fR]
+.br
+.B number2text
+[\fB\-l\fR | \fB\-\-language\fR] \fIcode\fR \fInumber\fR
+.SH DESCRIPTION
+.B number2text
+is a GUI application that converts numbers to text in various languages.
+.PP
+When run without arguments, it launches the graphical user interface. It can also be used from the command line to convert numbers directly by specifying the language and the number.
+.SH OPTIONS
+.TP
+.BR \-v ", " \-\-version
+Show application version and exit.
+.TP
+.BR \-h ", " \-\-help
+Show help message and exit.
+.TP
+.BR \-l ", " \-\-language " " \fIcode\fR
+Specify the language for conversion. This option must be followed by the language code and then the number to convert.
+.RS
+.PP
+Available language codes:
+.TP
+.B en
+English
+.TP
+.B fr
+French
+.TP
+.B de
+German
+.TP
+.B it
+Italian
+.TP
+.B ru
+Russian
+.TP
+.B es
+Spanish
+.RE
+.SH EXAMPLES
+.TP
+Launch the GUI:
+.B number2text
+.TP
+Convert 123 to English text:
+.B number2text \-l en 123
+.TP
+Convert 42 to French text:
+.B number2text \-\-language fr 42
+.SH AUTHOR
+Konstantin Adamov <xrayadamo@gmail.com>
