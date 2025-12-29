@@ -24,6 +24,10 @@ impl BaseConverter for SpanishConverter {
         "Spanish"
     }
 
+    fn short_name(&self) -> &str {
+        "es"
+    }
+
     fn native_number_too_large_error_text(&self) -> &str {
         "Número demasiado grande"
     }

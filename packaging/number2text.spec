@@ -35,13 +35,14 @@ Russian
 %setup -q -n release
 
 %build
-# This section is intentionally left blank as we are packaging a pre-compiled Flutter application.
+# This section is intentionally left blank as we are packaging a pre-compiled application.
 
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}/usr/share/applications
 mkdir -p %{buildroot}/usr/share/icons/hicolor/256x256/apps
+mkdir -p %{buildroot}/usr/share/man/man1
 mkdir -p %{buildroot}/opt/%{_name}
 mkdir -p %{buildroot}%{_datadir}/metainfo
 
@@ -59,12 +60,14 @@ install -m 644 %{SOURCE2} %{buildroot}/usr/share/icons/hicolor/256x256/apps/%{_n
 
 # Copy meta info
 install -m 644 %{SOURCE3} %{buildroot}%{_datadir}/metainfo/%{name}.metainfo.xml
+ln -s /opt/%{_name}/assets/number2text.1.gz %{buildroot}/usr/share/man/man1/%{_name}.1.gz
 %files
 /usr/bin/%{_name}
 /opt/%{_name}
 /usr/share/applications/%{_name}.desktop
 /usr/share/icons/hicolor/256x256/apps/%{_name}.png
 %{_datadir}/metainfo/%{name}.metainfo.xml
+/usr/share/man/man1/%{_name}.1.gz
 
 %changelog
 *loghere

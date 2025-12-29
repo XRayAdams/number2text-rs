@@ -40,4 +40,13 @@ impl AppViewModel {
     pub fn get_app_version() -> &'static str {
         env!("CARGO_PKG_VERSION")
     }
+
+    pub fn convert_by_language(&self, language_code: &str, input: i64) -> Option<String> {
+        for converter in self.number_converter.base_converters.iter() {
+            if converter.short_name() == language_code {
+                return Some(converter.convert(input));
+            }
+        }
+        None
+    }
 }

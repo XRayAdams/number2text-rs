@@ -108,6 +108,10 @@ impl BaseConverter for RussianConverter {
     fn name(&self) -> &str {
         "Russian"
     }
+    
+    fn short_name(&self) -> &str {
+        "ru"
+    }
 
     fn native_number_too_large_error_text(&self) -> &str {
         "число слишком большое"

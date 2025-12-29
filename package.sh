@@ -20,6 +20,7 @@ fi
 # Clean and build app in release mode
 cargo clean
 cargo build --release
+rm -rf dist
 
 APP_NAME=$(grep -E '^\s*name = ' "$CARGO_FILE" | head -n1 | cut -d ' ' -f 3 | tr -d '"')
 APP_VERSION_LONG=$(grep -E '^\s*version = ' "$CARGO_FILE" | head -n1 | cut -d ' ' -f 3 | tr -d '"')
@@ -39,10 +40,14 @@ mkdir -p "$PACKAGE_DIR/usr/local/lib/$APP_NAME"
 mkdir -p "$PACKAGE_DIR/usr/share/applications"
 mkdir -p "$PACKAGE_DIR/usr/share/icons"
 mkdir -p "$PACKAGE_DIR/usr/share/metainfo"
+mkdir -p "$PACKAGE_DIR/usr/share/man/man1"
 
 # Copy the built binary
 cp "target/release/$APP_NAME" "$PACKAGE_DIR/usr/local/lib/$APP_NAME/"
 cp -r "target/release/assets" "$PACKAGE_DIR/usr/local/lib/$APP_NAME/"
+# Create symlink for man page
+ln -s "/usr/local/lib/$APP_NAME/assets/number2text.1.gz" "$PACKAGE_DIR/usr/share/man/man1/number2text.1.gz"
+
 cp packaging/gui/$APP_ID.desktop "$PACKAGE_DIR/usr/share/applications/"
 cp packaging/gui/$APP_ID.png "$PACKAGE_DIR/usr/share/icons/"
 cp packaging/$APP_ID.metainfo.xml "$PACKAGE_DIR/usr/share/metainfo/"
@@ -50,6 +55,8 @@ cp packaging/$APP_ID.metainfo.xml "$PACKAGE_DIR/usr/share/metainfo/"
 # Copy control file
 mkdir -p "$PACKAGE_DIR/DEBIAN"
 cp packaging/control "$PACKAGE_DIR/DEBIAN/control"
+cp packaging/postinst "$PACKAGE_DIR/DEBIAN/postinst"
+chmod 755 "$PACKAGE_DIR/DEBIAN/postinst"
 
 # Build the .deb package
 dpkg-deb --build "$PACKAGE_DIR"

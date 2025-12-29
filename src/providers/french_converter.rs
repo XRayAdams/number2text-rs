@@ -25,6 +25,10 @@ impl BaseConverter for FrenchConverter {
         "French"
     }
 
+    fn short_name(&self) -> &str {
+        "fr"
+    }
+
     fn native_number_too_large_error_text(&self) -> &str {
         "Nombre trop grand"
     }
