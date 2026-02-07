@@ -1,59 +1,73 @@
 use super::view_model::AppViewModel;
+use clap::{Parser, ValueEnum};
 
-pub fn parse_cmdline_args(args: &[String])  {
-    if args[0] == "--version" || args[1] == "-v" {
-        print_version();
-        return;
-    }
+#[derive(Debug, Clone, Copy, ValueEnum)]
+pub enum Language {
+    #[value(name = "en")]
+    English,
+    #[value(name = "fr")]
+    French,
+    #[value(name = "de")]
+    German,
+    #[value(name = "it")]
+    Italian,
+    #[value(name = "ru")]
+    Russian,
+    #[value(name = "es")]
+    Spanish,
+}
 
-    if args[0] == "--help" || args[1] == "-h" {
-        print_help();
-        return;
-    }
-    let languages = vec!["en", "fr", "de", "it", "ru", "es"];
-    let language ;
-    if args[0] == "--language" || args[1] == "-l" {
-        if languages.contains(&args[2].as_str()) == false {
-            println!("Please specify a language code after --language or -l.");
-            return;
+impl Language {
+    fn as_str(&self) -> &str {
+        match self {
+            Language::English => "en",
+            Language::French => "fr",
+            Language::German => "de",
+            Language::Italian => "it",
+            Language::Russian => "ru",
+            Language::Spanish => "es",
         }
+    }
+}
 
-        language = args[2].as_str();
-        
-        if args.get(3).is_none() {
-            println!("Please specify a number to convert after the language code.");
-            return;
-        }
+#[derive(Parser, Debug)]
+#[command(name = "number2text")]
+#[command(author = "Konstantin Adamov <xrayadamo@gmail.com>")]
+#[command(version)]
+#[command(about = "A number to text converter application", long_about = None)]
+pub struct Cli {
+    /// Specify language for conversion
+    #[arg(short = 'l', long = "language", value_enum)]
+    pub language: Option<Language>,
 
-        if let Ok(number) = args[3].parse::<i64>(){
-            let view_model = AppViewModel::new();    
-            match view_model.convert_by_language(language, number) {
+    /// Number to convert to text
+    #[arg(value_name = "NUMBER")]
+    pub number: Option<i64>,
+}
+
+pub fn parse_cmdline_args() -> bool {
+    let cli = Cli::parse();
+
+    match (cli.language, cli.number) {
+        (Some(language), Some(number)) => {
+            let view_model = AppViewModel::new();
+            match view_model.convert_by_language(language.as_str(), number) {
                 Some(result) => println!("{}", result),
                 None => println!("Could not convert number."),
             }
-            return;
-        } else {
-            println!("Please specify a valid number to convert after the language code.");
+            true
         }
-        
-        return;
+        (Some(_), None) => {
+            eprintln!("Error: Please specify a number to convert after the language code.");
+            std::process::exit(1);
+        }
+        (None, Some(_)) => {
+            eprintln!("Error: Please specify a language using -l or --language.");
+            std::process::exit(1);
+        }
+        (None, None) => {
+            // No arguments, launch GUI
+            false
+        }
     }
-
-    println!("Unknown command line argument. Use --help to see available options.");
-    
-}
-
-fn print_version(){
-    println!("Number 2 Text version {}", AppViewModel::get_app_version());
-}
-
-fn print_help(){
-    println!("Number 2 Text - A number to text converter application.");
-    println!();
-    println!("Usage: number2text [OPTIONS] number");
-    println!();
-    println!("Options:");
-    println!("  -v, --version       Show application version");
-    println!("  -h, --help          Show this help message");
-    println!("  -l, --language      Specify language for conversion (Available languages: en, fr, de, it, ru, es)", );
 }
