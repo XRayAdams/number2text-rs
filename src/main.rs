@@ -9,7 +9,6 @@ use gtk4::{Application, ApplicationWindow, Label, Entry, ComboBoxText, Box as Gt
            MenuButton, gio, HeaderBar, IconTheme};
 use std::cell::RefCell;
 use std::rc::Rc;
-use std::env;
 
 mod providers;
 mod view_model;
@@ -22,23 +21,21 @@ const SPACING_MEDIUM: i32 = 12;
 const SPACING_LARGE: i32 = 18;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
+    // Check if command-line arguments were provided
+    // parse_cmdline_args returns true if it handled the command, false if GUI should launch
+    if !parse_cmdline_args() {
+        // No command-line arguments, launch GUI
+        adw::init().expect("Failed to initialize Libadwaita");
+        
+        let app = Application::builder()
+            .application_id("app.rayadams.number2text")
+            .flags(gio::ApplicationFlags::NON_UNIQUE)
+            .build();
 
-    if args.len() > 1 {
-        parse_cmdline_args(&args);
-        return;
+        app.connect_activate(build_ui);
+
+        app.run();
     }
-
-    adw::init().expect("Failed to initialize Libadwaita");
-    
-    let app = Application::builder()
-        .application_id("app.rayadams.number2text")
-        .flags(gio::ApplicationFlags::NON_UNIQUE)
-        .build();
-
-    app.connect_activate(build_ui);
-
-    app.run();
 }
 
 fn build_ui(app: &Application) {

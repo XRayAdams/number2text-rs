@@ -8,7 +8,63 @@ Number 2 Text is a free, open-source application to convert numbers to text.
 * Spanish
 * German
 * French
+* Italian
 * Russian
+
+## Usage
+
+### GUI Mode
+
+Launch the application without arguments to open the graphical interface:
+
+```bash
+number2text
+```
+
+### Command Line Mode
+
+Convert numbers to text directly from the command line:
+
+```bash
+number2text --language <LANGUAGE> <NUMBER>
+```
+
+#### Options
+
+- `-l, --language`: Specify the language for conversion
+  - Possible values: `en` (English), `fr` (French), `de` (German), `it` (Italian), `ru` (Russian), `es` (Spanish)
+- `-h, --help`: Display help information
+- `-V, --version`: Display version information
+
+#### Examples
+
+Convert a number to English:
+```bash
+number2text --language en 42
+# Output: forty two
+```
+
+Convert using the short option:
+```bash
+number2text -l fr 123
+# Output: cent vingt-trois
+```
+
+Convert large numbers:
+```bash
+number2text -l de 1000000
+# Output: eine Million
+```
+
+Get help:
+```bash
+number2text --help
+```
+
+Check version:
+```bash
+number2text --version
+```
 
 ## Screenshots
 
