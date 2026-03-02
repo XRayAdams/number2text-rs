@@ -1,6 +1,6 @@
 %define _name number2text
-%define _version 2.2.1
-%define _release 26
+%define _version 2.2.2
+%define _release 31
 %define debug_package %{nil}
 
 Name: %{_name}
@@ -17,6 +17,7 @@ Source0: %{_name}-%{_version}.tar.gz
 Source1: app.rayadams.number2text.desktop
 Source2: app.rayadams.number2text.png
 Source3: app.rayadams.number2text.metainfo.xml
+Source4: number2text.1.gz
 
 Requires: gtk4, libadwaita, libstdc++
 
@@ -43,14 +44,11 @@ mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}/usr/share/applications
 mkdir -p %{buildroot}/usr/share/icons/hicolor/256x256/apps
 mkdir -p %{buildroot}/usr/share/man/man1
-mkdir -p %{buildroot}/opt/%{_name}
 mkdir -p %{buildroot}%{_datadir}/metainfo
 
-# Copy the application files
-cp -r ./* %{buildroot}/opt/%{_name}/
 
-# Create a symlink in /usr/bin
-ln -s /opt/%{_name}/%{_name} %{buildroot}/usr/bin/%{_name}
+# Install the binary directly to /usr/bin
+install -m 755 %{_name} %{buildroot}/usr/bin/%{_name}
 
 # Copy the desktop file
 install -m 644 %{SOURCE1} %{buildroot}/usr/share/applications/%{_name}.desktop
@@ -60,10 +58,11 @@ install -m 644 %{SOURCE2} %{buildroot}/usr/share/icons/hicolor/256x256/apps/%{_n
 
 # Copy meta info
 install -m 644 %{SOURCE3} %{buildroot}%{_datadir}/metainfo/%{name}.metainfo.xml
-ln -s /opt/%{_name}/assets/number2text.1.gz %{buildroot}/usr/share/man/man1/%{_name}.1.gz
+
+install -m 644 %{SOURCE4} %{buildroot}/usr/share/man/man1/%{_name}.1.gz
+
 %files
 /usr/bin/%{_name}
-/opt/%{_name}
 /usr/share/applications/%{_name}.desktop
 /usr/share/icons/hicolor/256x256/apps/%{_name}.png
 %{_datadir}/metainfo/%{name}.metainfo.xml

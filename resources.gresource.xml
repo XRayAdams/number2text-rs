@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/app/rayadams/number2text">
+    <file compressed="true">assets/app.rayadams.number2text.png</file>
+  </gresource>
+</gresources>

@@ -6,7 +6,7 @@
 use gtk4::prelude::*;
 use libadwaita as adw;
 use gtk4::{Application, ApplicationWindow, Label, Entry, ComboBoxText, Box as GtkBox, TextView, 
-           MenuButton, gio, HeaderBar, IconTheme};
+           MenuButton, gio, HeaderBar};
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -14,8 +14,10 @@ mod providers;
 mod view_model;
 mod settings;
 mod cmdline;
+mod init_icon;
 use view_model::AppViewModel;
 use cmdline::parse_cmdline_args;
+use init_icon::init_app_icon;
 
 const SPACING_MEDIUM: i32 = 12;
 const SPACING_LARGE: i32 = 18;
@@ -27,50 +29,24 @@ fn main() {
         // No command-line arguments, launch GUI
         adw::init().expect("Failed to initialize Libadwaita");
         
+        init_icon::init_app_icon();
+
         let app = Application::builder()
             .application_id("app.rayadams.number2text")
             .flags(gio::ApplicationFlags::NON_UNIQUE)
             .build();
 
-        app.connect_activate(build_ui);
+        app.connect_activate(|app| {
+            init_app_icon();    
+            build_ui(app);
+        });
 
         app.run();
     }
 }
 
 fn build_ui(app: &Application) {
-    let display = gtk4::gdk::Display::default().expect("Could not get default display.");
-    let icon_theme = IconTheme::for_display(&display);
     
-    // Check if running in Snap environment
-    if let Ok(snap_path) = std::env::var("SNAP") {
-        let assets_path = std::path::Path::new(&snap_path).join("assets");
-        icon_theme.add_search_path(assets_path);
-    } else {
-        // Fallback for local development
-        icon_theme.add_search_path("assets");
-
-        // Check paths relative to the executable
-        if let Ok(exe_path) = std::env::current_exe() {
-            if let Some(exe_dir) = exe_path.parent() {
-                // 1. Assets next to executable (e.g. portable tarball)
-                let local_assets = exe_dir.join("assets");
-                if local_assets.exists() {
-                    icon_theme.add_search_path(local_assets);
-                }
-
-                // 2. Standard Linux install: ../share/number2text/assets
-                // (assuming binary is in /usr/bin or /usr/local/bin)
-                if let Some(prefix) = exe_dir.parent() {
-                    let system_assets = prefix.join("share").join("number2text").join("assets");
-                    if system_assets.exists() {
-                        icon_theme.add_search_path(system_assets);
-                    }
-                }
-            }
-        }
-    }
-
     let view_model = Rc::new(RefCell::new(AppViewModel::new()));
 
     let window = ApplicationWindow::builder()
