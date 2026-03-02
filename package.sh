@@ -36,17 +36,15 @@ PACKAGE_DIR="$APP_NAME-$APP_VERSION+$APP_BUILD-$DEBIAN_ARCH"
 printf "Creating DEB package in %s.deb\n" "$PACKAGE_DIR"
 # Create the package directory
 rm -rf "$PACKAGE_DIR"
-mkdir -p "$PACKAGE_DIR/usr/local/lib/$APP_NAME"
+mkdir -p "$PACKAGE_DIR/usr/bin"
 mkdir -p "$PACKAGE_DIR/usr/share/applications"
 mkdir -p "$PACKAGE_DIR/usr/share/icons"
 mkdir -p "$PACKAGE_DIR/usr/share/metainfo"
 mkdir -p "$PACKAGE_DIR/usr/share/man/man1"
 
 # Copy the built binary
-cp "target/release/$APP_NAME" "$PACKAGE_DIR/usr/local/lib/$APP_NAME/"
-cp -r "target/release/assets" "$PACKAGE_DIR/usr/local/lib/$APP_NAME/"
-# Create symlink for man page
-ln -s "/usr/local/lib/$APP_NAME/assets/number2text.1.gz" "$PACKAGE_DIR/usr/share/man/man1/number2text.1.gz"
+cp "target/release/$APP_NAME" "$PACKAGE_DIR/usr/bin/$APP_NAME"
+cp "assets/number2text.1.gz" "$PACKAGE_DIR/usr/share/man/man1/number2text.1.gz"
 
 cp packaging/gui/$APP_ID.desktop "$PACKAGE_DIR/usr/share/applications/"
 cp packaging/gui/$APP_ID.png "$PACKAGE_DIR/usr/share/icons/"
@@ -59,7 +57,7 @@ cp packaging/postinst "$PACKAGE_DIR/DEBIAN/postinst"
 chmod 755 "$PACKAGE_DIR/DEBIAN/postinst"
 
 # Build the .deb package
-dpkg-deb --build "$PACKAGE_DIR"
+fakeroot dpkg-deb --build "$PACKAGE_DIR"
 
 # Clean up
 rm -rf "$PACKAGE_DIR"
@@ -90,10 +88,11 @@ sed "s/^*loghere$/* $CHANGE_DATE/" "packaging/$APP_NAME.spec" > "$RPM_BUILD_ROOT
 sed -e "s/Icon=$APP_ID/Icon=$APP_NAME/" -e "s/^\(Exec\|TryExec\)=.*$/\1=$APP_NAME/" "packaging/gui/$APP_ID.desktop"  > "$RPM_BUILD_ROOT/SOURCES/$APP_ID.desktop"
 cp packaging/gui/"$APP_ID".png "$RPM_BUILD_ROOT/SOURCES/"
 cp packaging/"$APP_ID".metainfo.xml "$RPM_BUILD_ROOT/SOURCES/"
+cp assets/number2text.1.gz "$RPM_BUILD_ROOT/SOURCES/"
 
 # Package the application files into a tarball
 pushd target || exit
-tar -czvf "$RPM_BUILD_ROOT/SOURCES/$APP_NAME-$APP_VERSION.tar.gz" "release/$APP_NAME" release/assets
+tar -czvf "$RPM_BUILD_ROOT/SOURCES/$APP_NAME-$APP_VERSION.tar.gz" "release/$APP_NAME" 
 popd || exit
 
 # Build the RPM
@@ -121,6 +120,6 @@ FULL_ARCHIVE_PATH="dist/${ARCHIVE_NAME}"
 SOURCE_DIR="target/release"
 
 # Only include the executable and the assets folder
-tar -czvf "$FULL_ARCHIVE_PATH" -C "$SOURCE_DIR" "$APP_NAME" assets > /dev/null
+tar -czvf "$FULL_ARCHIVE_PATH" -C "$SOURCE_DIR" "$APP_NAME" -C "$(pwd)/assets" "number2text.1.gz" > /dev/null
 echo "TAR archive created in dist/"
 echo "___________________________________________________________"
