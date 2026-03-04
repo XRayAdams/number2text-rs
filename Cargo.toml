@@ -1,6 +1,6 @@
 [package]
 name = "number2text"
-version = "2.2.2+31"
+version = "2.2.2+32"
 edition = "2024"
 authors = ["Konstantin Adamov <xrayadamo@gmail.com>"]
 description = "A GUI application that converts numbers to text in various languages."
