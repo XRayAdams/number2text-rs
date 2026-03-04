@@ -28,6 +28,10 @@
 </ul>
 </description>
 
+  <releases>
+    <release version="2.2.2+32" date="2026-03-04"/>
+  </releases>
+
   <launchable type="desktop-id">app.rayadams.number2text.desktop</launchable>
   <developer id="app.rayadams">
     <name translate="no">Konstantin Asamov</name>
@@ -35,13 +39,16 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/XRayAdams/number2text-rs/refs/heads/master/screenshots/screenshot01.png</image>
+      <caption>Main window</caption>
+      <image>https://raw.githubusercontent.com/XRayAdams/number2text-rs/refs/tags/v2.2.2+32/screenshots/screenshot01.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/XRayAdams/number2text-rs/refs/heads/master/screenshots/screenshot02.png</image>
-    </screenshot>  
+      <caption>Number conversion example</caption>
+      <image>https://raw.githubusercontent.com/XRayAdams/number2text-rs/refs/tags/v2.2.2+32/screenshots/screenshot02.png</image>
+    </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/XRayAdams/number2text-rs/refs/heads/master/screenshots/screenshot03.png</image>
-    </screenshot>  
+      <caption>Language selection</caption>
+      <image>https://raw.githubusercontent.com/XRayAdams/number2text-rs/refs/tags/v2.2.2+32/screenshots/screenshot03.png</image>
+    </screenshot>
   </screenshots>
 </component>

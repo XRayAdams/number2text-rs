@@ -11,6 +11,7 @@ DEBIAN_DESKTOP_FILE="packaging/gui/app.rayadams.number2text.desktop"
 SNAP_YAML_FILE="snap/snapcraft.yaml"
 SNAP_DESKTOP_FILE="snap/gui/number2text.desktop"
 RPM_FILE="packaging/number2text.spec"
+FEDORA_SPEC_FILE="packaging/rpmpublish/app.rayadams.number2text.spec"
 MACHINE_ARCH=$(uname -m)
 DEBIAN_CONTROL_FILE_ARCH="amd64"
 
@@ -50,10 +51,12 @@ if [ ! -f "$RPM_FILE" ]; then
     echo "Error: File not found: $RPM_FILE"
     exit 1
 fi
+if [ ! -f "$FEDORA_SPEC_FILE" ]; then
+    echo "Error: File not found: $FEDORA_SPEC_FILE"
+    exit 1
+fi
 
 # Read version from Cargo.toml (extracts the line with 'version =' and gets the value after the space)
-
-# Read version from Cargo.toml (format: version = "2.2.1+23")
 APP_VERSION=$(grep -E '^\s*version = ' "$CARGO_FILE" | head -n1 | cut -d ' ' -f 3 | tr -d '"')
 
 if [ -z "$APP_VERSION" ]; then
@@ -67,18 +70,22 @@ echo "Version '$APP_VERSION' found in $CARGO_FILE"
 APP_VERSION_SHORT=$(echo "$APP_VERSION" | cut -d'+' -f1)
 APP_BUILD=$(echo "$APP_VERSION" | cut -d'+' -f2)
 
-# Use sed to find and replace the Version line in debian.yaml and desktop file
+# Use sed to find and replace the Version line in debian.yaml and snap
 # This command looks for the line starting with '  Version:' and replaces the entire line.
 sed -i "s/^\(\s*Version:\s*\).*\$/\1$APP_VERSION/" "$DEBIAN_CONTROL_FILE"
 sed -i "s/^\(\s*Architecture:\s*\).*\$/\1$DEBIAN_CONTROL_FILE_ARCH/" "$DEBIAN_CONTROL_FILE"
-
-sed -i "s/^\(\s*Version=\s*\).*\$/\1$APP_VERSION/" "$DEBIAN_DESKTOP_FILE"
-
 sed -i "s/^\(\s*version:\s*\).*\$/\1$APP_VERSION/" "$SNAP_YAML_FILE"
-sed -i "s/^\(\s*Version=\s*\).*\$/\1$APP_VERSION/" "$SNAP_DESKTOP_FILE"
 
 # Update version in RPM spec file
 sed -i "s/^\(\s*%define _version \s*\).*\$/\1$APP_VERSION_SHORT/" "$RPM_FILE"
 sed -i "s/^\(\s*%define _release \s*\).*\$/\1$APP_BUILD/" "$RPM_FILE"
+
+# Update version in Fedora spec file
+CHANGELOG_DATE=$(date +"%a %b %d %Y")
+CHANGELOG_VER="$APP_VERSION_SHORT-$APP_BUILD"
+sed -i "s/^\(%global upstreamver \).*\$/\1$APP_VERSION/" "$FEDORA_SPEC_FILE"
+sed -i "s/^\(Version:\s*\).*\$/\1$APP_VERSION_SHORT/" "$FEDORA_SPEC_FILE"
+sed -i "s/^\(Release:\s*\).*\$/\1${APP_BUILD}%{?dist}/" "$FEDORA_SPEC_FILE"
+sed -i "s/^\(\* \).*\(<xrayadamo@gmail\.com>\).*\$/\1$CHANGELOG_DATE Konstantin Adamov \2 - $CHANGELOG_VER/" "$FEDORA_SPEC_FILE"
 
 echo "Successfully updated version to $APP_VERSION in all relevant files."

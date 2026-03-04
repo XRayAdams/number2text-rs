@@ -1,5 +1,5 @@
 Package: number2text
-Version: 2.2.2+31
+Version: 2.2.2+32
 Architecture: amd64
 Priority: optional
 Depends: libgtk-4-1, libadwaita-1-0
