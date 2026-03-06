@@ -67,5 +67,5 @@ install -D -p -m 0644 packaging/%{name}.1 \
 %{_mandir}/man1/%{name}.1*
 
 %changelog
-* Wed Mar 04 2026 Konstantin Adamov <xrayadamo@gmail.com> - 2.2.2-32
+* Fri Mar 06 2026 Konstantin Adamov <xrayadamo@gmail.com> - 2.2.2-32
 - Initial Fedora packaging

@@ -1,0 +1,37 @@
+# Maintainer: Konstantin Adamov <xrayadamo@gmail.com>
+pkgname=number2text
+pkgver=2.2.2
+pkgrel=32
+pkgdesc="Number 2 Text is a free, open-source application to convert numbers to text."
+arch=('x86_64' 'aarch64')
+url="https://github.com/XRayAdams/number2text-rs"
+license=('MIT')
+depends=('gtk4' 'libadwaita' 'glibc' 'gcc-libs')
+makedepends=('cargo' 'gettext' 'glib2')
+
+build() {
+  cd "$startdir"
+  cargo build --release --locked --target-dir=target
+}
+
+package() {
+  cd "$startdir"
+  
+  # Main executable
+  install -Dm755 "target/release/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+
+  # Desktop file
+  install -Dm644 "packaging/gui/app.rayadams.number2text.desktop" -t "${pkgdir}/usr/share/applications/"
+  
+  # Icon
+  install -Dm644 "packaging/gui/app.rayadams.number2text.png" "${pkgdir}/usr/share/icons/hicolor/512x512/apps/app.rayadams.number2text.png"
+  
+  # Metainfo
+  install -Dm644 "packaging/app.rayadams.number2text.metainfo.xml" -t "${pkgdir}/usr/share/metainfo/"
+  
+  # Man page
+  install -Dm644 "assets/number2text.1.gz" -t "${pkgdir}/usr/share/man/man1/"
+
+  # License
+  install -Dm644 "LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}/"
+}
