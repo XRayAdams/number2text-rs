@@ -98,6 +98,16 @@ number2text --version
     sudo rpm -i [name-of-the-package].rpm
     ```
 
+### As Arch Linux package
+
+1. Download the latest `.pkg.tar.zst` package from the project's GitHub releases page.
+2. Open a terminal and navigate to the directory where you downloaded the file.
+3. Install the package using the following command:
+
+    ```bash
+    sudo pacman -U [name-of-the-package].pkg.tar.zst
+    ```
+
 Replace `[name-of-the-package].rpm` with the actual file name.
 
 ---
