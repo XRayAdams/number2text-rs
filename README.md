@@ -10,6 +10,7 @@ Number 2 Text is a free, open-source application to convert numbers to text.
 * French
 * Italian
 * Russian
+* Portuguese
 
 ## Usage
 
