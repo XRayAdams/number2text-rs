@@ -1,13 +1,53 @@
 [package]
 name = "number2text"
-version = "2.2.2+32"
+version = "2.2.3+33"
 edition = "2024"
 authors = ["Konstantin Adamov <xrayadamo@gmail.com>"]
 description = "A GUI application that converts numbers to text in various languages."
 license = "MIT"
 repository = "https://github.com/XRayAdams/number2text-rs"
+copyright = "2025,26 Konstantin Adamov <xrayadamo@gmail.com>"
+homepage = "https://github.com/XRayAdams/number2text-rs"
+keywords = ["number","generator","to text"]
+categories = ["gui","utils"]
+
 
 [dependencies]
 gtk4 = "0.10"
 libadwaita = { version = "0.8", features = ["v1_5"] }
 clap = { version = "4.5", features = ["derive"] }
+
+[package.metadata.deb]
+section = "utils"
+license-file = "LICENSE"
+extended-description-file = "packaging/description.txt"
+depends = "libgtk-4-1, libadwaita-1-0"
+revision = ""
+assets = [
+    ["target/release/number2text","/usr/bin/", "755"],
+    ["packaging/gui/app.rayadams.number2text.png", "/usr/share/icons/hicolor/512x512/apps/", "644"],
+    ["packaging/gui/app.rayadams.number2text.desktop", "/usr/share/applications/", "644"],
+    ["LICENSE", "/usr/share/doc/number2text/LICENSE", "644"],
+    ["assets/number2text.1.gz","/usr/share/man/man1/","644"],
+    ["packaging/app.rayadams.number2text.metainfo.xml","/usr/share/metainfo/", "644"]
+]
+
+
+[package.metadata.generate-rpm]
+section = "utils"
+license-file = "LICENSE"
+extended-description-file = "packaging/description.txt"
+revision = ""
+assets = [
+    {source = "target/release/number2text", dest = "/usr/bin/", mode = "755"},
+    {source = "packaging/gui/app.rayadams.number2text.png", dest = "/usr/share/icons/hicolor/512x512/apps/", mode = "644"},
+    {source = "packaging/gui/app.rayadams.number2text.desktop", dest = "/usr/share/applications/", mode = "644"},
+    {source = "LICENSE", dest = "/usr/share/licenses/number2text/LICENSE", mode = "644"},
+    {source = "assets/number2text.1.gz",dest = "/usr/share/man/man1/", mode = "644"},
+    {source = "packaging/app.rayadams.number2text.metainfo.xml",dest = "/usr/share/metainfo/", mode = "644"}
+]
+
+[package.metadata.generate-rpm.requires]
+gtk4="*"
+libadwaita = "*"
+"libstdc++" = "*"
