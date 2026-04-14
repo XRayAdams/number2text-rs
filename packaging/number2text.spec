@@ -1,6 +1,6 @@
 %define _name number2text
-%define _version 2.2.2
-%define _release 32
+%define _version 2.2.3
+%define _release 33
 %define debug_package %{nil}
 
 Name: %{_name}
@@ -30,6 +30,8 @@ Spanish
 German
 French
 Russian
+Italian
+Portuguese
 
 
 %prep
