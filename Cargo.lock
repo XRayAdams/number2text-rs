@@ -552,7 +552,7 @@ dependencies = [
 
 [[package]]
 name = "number2text"
-version = "2.2.3+33"
+version = "2.2.4+35"
 dependencies = [
  "clap",
  "gtk4",
