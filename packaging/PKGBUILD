@@ -1,7 +1,7 @@
 # Maintainer: Konstantin Adamov <xrayadamo@gmail.com>
 pkgname=number2text
-pkgver=2.2.3
-pkgrel=33
+pkgver=2.2.4
+pkgrel=35
 pkgdesc="Number 2 Text is a free, open-source application to convert numbers to text."
 arch=('x86_64' 'aarch64')
 url="https://github.com/XRayAdams/number2text-rs"

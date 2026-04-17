@@ -7,6 +7,7 @@ use super::base_converter::BaseConverter;
 use super::english_converter::EnglishConverter;
 use super::french_converter::FrenchConverter;
 use super::german_converter::GermanConverter;
+use super::indonesian_converter::IndonesianConverter;
 use super::italian_converter::ItalianConverter;
 use super::portuguese_converter::PortugueseConverter;
 use super::russian_converter::RussianConverter;
@@ -23,6 +24,7 @@ impl NumberConverter {
                 Box::new(EnglishConverter),
                 Box::new(FrenchConverter),
                 Box::new(GermanConverter),
+                Box::new(IndonesianConverter),
                 Box::new(ItalianConverter),
                 Box::new(PortugueseConverter),
                 Box::new(RussianConverter),
