@@ -8,6 +8,7 @@ Number 2 Text is a free, open-source application to convert numbers to text.
 * Spanish
 * German
 * French
+* Indonesian
 * Italian
 * Russian
 * Portuguese

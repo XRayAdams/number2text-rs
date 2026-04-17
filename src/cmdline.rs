@@ -9,8 +9,12 @@ pub enum Language {
     French,
     #[value(name = "de")]
     German,
+    #[value(name = "id")]
+    Indonesian,
     #[value(name = "it")]
     Italian,
+    #[value(name = "pt")]
+    Portuguese,
     #[value(name = "ru")]
     Russian,
     #[value(name = "es")]
@@ -23,7 +27,9 @@ impl Language {
             Language::English => "en",
             Language::French => "fr",
             Language::German => "de",
+            Language::Indonesian => "id",
             Language::Italian => "it",
+            Language::Portuguese => "pt",
             Language::Russian => "ru",
             Language::Spanish => "es",
         }
