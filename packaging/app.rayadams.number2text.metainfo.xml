@@ -39,6 +39,9 @@
   <developer id="app.rayadams">
     <name translate="no">Konstantin Adamov</name>
   </developer>
+	<provides>
+		<id>app.rayadams.number2text.desktop</id>
+	</provides>
 
   <screenshots>
     <screenshot type="default">

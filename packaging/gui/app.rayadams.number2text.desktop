@@ -8,6 +8,6 @@ Categories=Utility;
 Keywords=Number, Text, Converter;
 StartupWMClass=app.rayadams.number2text
 
-Exec=/usr/bin/number2text
-TryExec=/usr/bin/number2text
+Exec=number2text
+TryExec=number2text
 Icon=app.rayadams.number2text
