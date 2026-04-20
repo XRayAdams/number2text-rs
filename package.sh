@@ -6,9 +6,13 @@ MACHINE_ARCH=$(uname -m)
 APPIMAGE_ARCH=$MACHINE_ARCH
 APP_ID="app.rayadams.number2text"
 CARGO_FILE="Cargo.toml"
+LINUXDEPLOY_TOOL="linuxdeploy-x86_64.AppImage"
+APPIMAGE_TOOL="appimagetool-x86_64.AppImage"
 
 if [ "$MACHINE_ARCH" == "aarch64" ]; then
     MACHINE_ARCH="arm64"
+    LINUXDEPLOY_TOOL="linuxdeploy-aarch64.AppImage"
+    APPIMAGE_TOOL="appimagetool-aarch64.AppImage"
 fi
 
 
@@ -99,8 +103,7 @@ echo "___________________________________________________________"
 
 echo "Creating AppImage"
 APP_IMAGE_FOLDER="AppImage"
-LINUXDEPLOY_TOOL="linuxdeploy-x86_64.AppImage"
-APPIMAGE_TOOL="appimagetool-x86_64.AppImage"
+
 APPIMAGE_OUTPUT="${APP_NAME}-${APP_VERSION}+${APP_BUILD}-${MACHINE_ARCH}.AppImage"
 
 rm -rf "$APP_IMAGE_FOLDER"
@@ -177,7 +180,7 @@ sed -i \
     '/^export GTK_PATH=/d' \
     "$HOOK"
 
-ARCH="$MACHINE_ARCH" "$APPIMAGE_TOOL" "$APP_IMAGE_FOLDER" "dist/$APPIMAGE_OUTPUT" \
+"$APPIMAGE_TOOL" "$APP_IMAGE_FOLDER" "dist/$APPIMAGE_OUTPUT" \
     --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 22
 
 rm -rf "$APP_IMAGE_FOLDER"
