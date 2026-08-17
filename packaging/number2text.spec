@@ -1,6 +1,6 @@
 %define _name number2text
 %define _version 2.2.4
-%define _release 36
+%define _release 37
 %define debug_package %{nil}
 
 Name: %{_name}
@@ -19,7 +19,7 @@ Source2: app.rayadams.number2text.png
 Source3: app.rayadams.number2text.metainfo.xml
 Source4: number2text.1.gz
 
-Requires: gtk4, libadwaita, libstdc++
+Requires: gtk4
 
 %description
 Number 2 Text is a free, open-source application to convert numbers to text.
